@@ -1,0 +1,12 @@
+
+
+h1 {
+    color: #4CAF50; /* Green color for the main heading */
+    text-align: center;
+}
+
+/* Change the color of the "Convert VND to Currency" heading */
+#calculateConversion h2 {
+    color: #FF5722; /* Orange color for the conversion section heading */
+    text-align: center;
+}

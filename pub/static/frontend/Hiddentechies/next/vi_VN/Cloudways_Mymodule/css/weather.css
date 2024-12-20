@@ -1,0 +1,23 @@
+/* Mymodule/view/frontend/web/css/weather.css */
+#weather {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+#weather h2 {
+    color: blue;
+}
+
+#weather h3 {
+    color: #ff0;
+    background-color: #ff00d4;
+}
+
+#weather p {
+    color: Green;
+}
+
+#weather img {
+    width: 50px;
+    height: 50px;
+}
