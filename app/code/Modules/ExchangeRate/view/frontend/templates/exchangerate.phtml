@@ -1,0 +1,95 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<?php
+// Tùy chọn SSL để lấy dữ liệu từ Vietcombank
+$arrContextOptions = array(
+    "ssl" => array(
+        "verify_peer" => false,
+        "verify_peer_name" => false,
+    ),
+);
+
+// URL của API tỷ giá Vietcombank
+$url = "https://portal.vietcombank.com.vn/Usercontrols/TVPortal.TyGia/pXML.aspx?b=68";
+$xml = file_get_contents($url, false, stream_context_create($arrContextOptions));
+$new = simplexml_load_string($xml);
+$con = json_encode($new);
+$data = json_decode($con, true);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng Tỷ Giá Vietcombank</title>
+</head>
+<body>
+<div class="container mt-4">
+    <h3 class="text-center">Bảng tỷ giá tiền tệ Vietcombank <?= $data['DateTime'] ?></h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col" class="text-center"><h5>STT</h5></th>
+            <th scope="col" class="text-center" style="width:80px;"><h5>Mã NT</h5></th>
+            <th scope="col" class="text-center" style="width:180px;"><h5>Tên ngoại tệ</h5></th>
+            <th scope="col" class="text-center" style="width:150px;"><h5>Giá mua tiền mặt</h5></th>
+            <th scope="col" class="text-center" style="width:180px;"><h5>Giá mua chuyển khoản</h5></th>
+            <th scope="col" class="text-center"><h5>Giá bán</h5></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($data['Exrate'] as $k => $currency): ?>
+            <tr>
+                <th scope="row" class="text-center"><h5><?= $k + 1 ?></h5></th>
+                <td style="font-size: 1.25rem;" class="text-center">
+                    <?= $currency['@attributes']['CurrencyCode'] ?>
+                </td>
+                <td><h5><?= $currency['@attributes']['CurrencyName'] ?></h5></td>
+                <td><h5><?= $currency['@attributes']['Buy'] ?></h5></td>
+                <td><h5><?= $currency['@attributes']['Transfer'] ?></h5></td>
+                <td><h5><?= $currency['@attributes']['Sell'] ?></h5></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+
+    <h3 class="text-center">Chuyển đổi tiền Việt Nam sang ngoại tệ</h3>
+    <form method="post" class="form-inline justify-content-center">
+        <div class="form-group">
+            <label for="amount" class="mr-2">Nhập số tiền (VNĐ):</label>
+            <input type="number" name="amount" id="amount" class="form-control mr-3" required>
+        </div>
+        <div class="form-group">
+            <label for="currency" class="mr-2">Chọn ngoại tệ:</label>
+            <select name="currency" id="currency" class="form-control mr-3">
+                <?php foreach ($data['Exrate'] as $currency): ?>
+                    <option value="<?= $currency['@attributes']['CurrencyCode'] ?>">
+                        <?= $currency['@attributes']['CurrencyName'] ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Chuyển đổi</button>
+    </form>
+
+    <?php
+    // Xử lý chuyển đổi tiền tệ khi người dùng submit form
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $amount = $_POST['amount']; // Số tiền VNĐ nhập vào
+        $selectedCurrency = $_POST['currency']; // Loại ngoại tệ được chọn
+
+        foreach ($data['Exrate'] as $currency) {
+            if ($currency['@attributes']['CurrencyCode'] === $selectedCurrency) {
+                $sellRate = str_replace(',', '', $currency['@attributes']['Sell']); // Lấy giá bán
+                $convertedAmount = $amount / $sellRate; // Tính số ngoại tệ
+                echo "<div class='mt-4'><h4 class='text-center'>Số tiền " . number_format($amount) . " VNĐ tương đương "
+                    . number_format($convertedAmount, 2) . " " . $selectedCurrency . "</h4></div>";
+                break;
+            }
+        }
+    }
+    ?>
+</div>
+</body>
+</html>

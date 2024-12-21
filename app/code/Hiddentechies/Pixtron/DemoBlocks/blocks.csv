@@ -209,7 +209,7 @@ Pixtron Home Images Block,pixtron-home-images-one,"<div class=""home-images-wrap
 </div>",1,0
 Pixtron Home Images Block,pixtron-home-images-two,"<div class=""home-parallax-block above-margin below-margin"">
 <h1>Pixtron Free Responsive Magento 2 Theme</h1>
-<a class=""action primary"" href=""http://www.hiddentechies.com/pixtron-responsive-theme-magento-2.html"" target=""_blank"">Download Now</a></div>",1,0
+<a class=""action primary"" href=""http://www.hiddentechies.com/pixtron-responsive-theme-magento-2.html"" target=""_blank"">Download Now</a></div>",0,0
 Pixtron Home Images Block,pixtron-home-images-three,"<div class=""home-images-wrapper-two above-padding below-padding"">
 <div class=""page-main"">
 <div class=""home-image-main"">
@@ -217,44 +217,6 @@ Pixtron Home Images Block,pixtron-home-images-three,"<div class=""home-images-wr
 <div class=""home-image-inner""><a href=""#""> <img class=""image-responsive middle-block"" src=""{{media url='wysiwyg/advertisement/adv-image-2.png'}}"" alt=""home-image"" /> </a></div>
 </div>
 </div>
-</div>",1,0
-Pixtron Home Services Block,pixtron-home-services,"<div class=""home-advantage-block"">
-    <div class=""page-main"">
-        <div class=""hab-row"">
-            <div class=""hab-inner"">
-                <div class=""home-advantage-block-inner"">
-                    <span>
-                        <em class=""fa fa-usd""></em>
-                    </span>
-                    <p>30-Day Money Back</p>
-                </div>
-            </div>
-            <div class=""hab-inner"">
-                <div class=""home-advantage-block-inner"">
-                    <span>
-                        <em class=""fa fa-headphones""></em>
-                    </span>
-                    <p>1 year Free Support</p>
-                </div>
-            </div>
-            <div class=""hab-inner"">
-                <div class=""home-advantage-block-inner"">
-                    <span>
-                        <em class=""fa fa-undo""></em>
-                    </span>
-                    <p>Free Lifetime Update</p>
-                </div>
-            </div>
-            <div class=""hab-inner"">
-                <div class=""home-advantage-block-inner"">
-                    <span>
-                        <em class=""fa fa-thumbs-up""></em>
-                    </span>
-                    <p>100% Satisfaction</p>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>",1,0
 Pixtron Home Slider,pixtron-home-slider,"<div class=""home-slider-wrapper"">
 <div class=""home-slider-main"">
@@ -343,7 +305,7 @@ Pixtron Below,pixtron-below,"{{widget type=""Magento\Cms\Block\Widget\Block"" te
 {{widget type=""Magento\Cms\Block\Widget\Block"" template=""widget/static_block/default.phtml"" block_id=""Pixtron-home-blogs""}}
 {{widget type=""Magento\Cms\Block\Widget\Block"" template=""widget/static_block/default.phtml"" block_id=""pixtron-home-brands""}}",1,0
 Pixtron  Footer Quicklinks Block,pixtron-footer-quicklinks,"<div class=""footer-colum-title"">
-    <h3>Quick Links</h3>
+    <h3>Links</h3>
 </div>
 <div class=""footer-column-content"">
     <ul class=""footer links"">
